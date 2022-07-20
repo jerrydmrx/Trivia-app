@@ -11,6 +11,7 @@ load_dotenv()
 DATABASE_USER=os.getenv("DATABASE_USER")
 USER_PASSWORD=os.getenv("USER_PASSWORD")
 
+# just take note of the def to know what there are testing for
 
 class TriviaTestCase(unittest.TestCase):
     """This class represents the trivia test case"""
@@ -176,6 +177,6 @@ class TriviaTestCase(unittest.TestCase):
         self.assertEqual(data['success'], False)
         self.assertEqual(data['message'], "bad request")
 
-# Make the tests conveniently executable
+# this tests is nade  executable from time to time
 if __name__ == "__main__":
     unittest.main()

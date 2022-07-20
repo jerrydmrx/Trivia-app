@@ -17,20 +17,20 @@ def paginate_questions(request, selection):
     current_questions = questions[start:end]
 
     return current_questions
-    # get a question by id from questions
+    # to get a question from questions uing question id
 def get_question(question_id,questions):
     for question in questions:
         if question.id == question_id:
              return question
 
 def create_app(test_config=None):
-    # create and configure the app
+    # configuration and creation of the app
     app = Flask(__name__)
     setup_db(app)
     CORS(app,resources={r"*":{"origins":"*"}})
   
 
-    # CORS Headers
+    # header for CORS
     @app.after_request
     def after_request(response):
         response.headers.add(
@@ -43,7 +43,7 @@ def create_app(test_config=None):
   
     @app.route("/categories")
     def get_categories():
-        # to get the all the categories
+        # to get all the categories
         all_categories = Category.query.all()
     
         if len(all_categories) == 0:
@@ -64,15 +64,15 @@ def create_app(test_config=None):
         query_questions = Question.query.all()
         paginated_questions = paginate_questions(request, query_questions)
 
-        # TO get all categories
+        # TO get all the categories in this route
         query_categories = Category.query.all()
 
-        # the list of all categories
+        # to get the list of all categories
         categories_list = {}
         for category in query_categories:
             categories_list[category.id] = category.type
 
-        # return 404 for empty question
+        # program should return 404 when question is empty
         if len(paginated_questions) == 0 :
             abort(404)
 
@@ -84,7 +84,7 @@ def create_app(test_config=None):
             "current_category": None
         })
      
-        # to Delete a question
+        # to Delete a question from all the questions
     @app.route("/questions/<int:q_id>", methods=['DELETE']) 
     def delate_a_question(q_id):
         try:
@@ -99,6 +99,7 @@ def create_app(test_config=None):
             "deleted": q_id
         })
     
+    #this would add a new question to qestions
     @app.route('/questions', methods=['POST'])
     def a_new_question():
         body = request.get_json()
@@ -118,6 +119,7 @@ def create_app(test_config=None):
         except BaseException:
             abort(422)
    
+   #this would sear for a word, phrase or entire question from questions
     @app.route('/questions/search', methods=['POST'])
     def search_term():
         try:
@@ -137,19 +139,20 @@ def create_app(test_config=None):
         except:
             abort(405)
   
+    #this would arrange and list out the questions according to thier category from questions
     @app.route('/categories/<int:category_id>/questions', methods=['GET'])
     def get_qestions_by_category(category_id):
         try:
-            # get all the questions filtered by cat_id
+            # this would get and filter all the questions according to thier category id from questions
             query_questions = Question.query.filter_by(
                 category=str(category_id)).order_by(
                 Question.id).all()
             questions_list = [question.format() for question in query_questions]
 
-            # get category
+            # this will list out all the category
             category = Category.query.get(category_id)
 
-            # else return json object
+            # else it should return the  json objects
             return jsonify({
                 "success": True,
                 "questions": questions_list,
@@ -159,36 +162,37 @@ def create_app(test_config=None):
         except BaseException:
             abort(404)
    
+   #this would list out all the quizzes or any quiz from questions
     @app.route('/quizzes', methods=['POST'])
     def play_quiz():
 
         try:
-            # get the category id
+            # to get the category id of the quiz
             c_id = int(request.get_json()['quiz_category']['id'])
             answered_q = request.get_json().get(
-                'previous_questions')  # previous questions
+                'previous_questions')  # last question
 
             if answered_q is None:
                 answered_q = []
             
-            query_categories = Category.query.all()  # query categories
+            query_categories = Category.query.all()  # which Cat
 
-            # store categories ids for check
+            # temperyly keep the categories ids for check
             category_list = []
             for category_id in query_categories:
                 category_list.append(category_id.id)
 
-            # if category is not specified -> ALL
+            # if the cat is not specified -> ALL
             if c_id == 0:
-                # get all the questions
+                # this would get all the questions from questions
                 all_questions = Question.query.order_by(Question.id).all()
 
-                question_list = []  # store the questions ids for comparison agains previous_questions
+                question_list = []  # this would store the questions ids gotten from questions for comparison againts former questions from questions
                 for question_id in all_questions:
                     question_list.append(question_id.id)
 
-            elif (c_id in category_list):  # a specific category
-                # get all the questions filtered by category id
+            elif (c_id in category_list):  # this would give you a specific category
+                # this would get all the qes filtered by cat id
                 all_questions = Question.query.filter_by(
                     category=str(c_id)).order_by(
                     Question.id).all()
@@ -199,19 +203,19 @@ def create_app(test_config=None):
             else:
                 abort(400)
 
-            # get random question id from questions_id
+            #this would randomly get question id from questions
             random_q = random.choice(question_list)
 
-            # let assume the question is not answered
+            # what happens when the question is not answered
             is_answered = False
-            # while the question is not answered, send the question and mark it
+            # then if the question is answered, send the question id and mark it
             # answered
             while not is_answered:
                 if random_q in answered_q:
                     random_q = random.choice(question_list)
                 else:
                     is_answered = True
-                # base case
+                
                 if len(all_questions) == len(answered_q):
                     return jsonify({"success": True})
 
