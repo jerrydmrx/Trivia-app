@@ -54,7 +54,7 @@ Setting the `FLASK_APP` variable to `flaskr` directs flask to use the `flaskr` d
 
 - Fetches a dictionary of categories, where the keys are the ids and the value is the category's associated string.
 - Request Arguments: None
-- Returns: An object of categories (keys;value pairs), with keys: ids of categories, values: name of categories and success.
+- Returns: An object of categories.
 
 ```json5
 {
@@ -79,90 +79,89 @@ Setting the `FLASK_APP` variable to `flaskr` directs flask to use the `flaskr` d
 ```json5
 {
   "categories": {
-    "1": "Science", 
-    "2": "Art", 
-    "3": "Geography", 
-    "4": "History", 
-    "5": "Entertainment", 
-    "6": "Sports"
-  }, 
-  "current_category": null, 
+      "1": "Science",
+      "2": "Art",
+      "3": "Geography",
+      "4": "History",
+      "5": "Entertainment",
+      "6": "Sports"
+  },
+  "current_category": null,
   "questions": [
-    {
-      "answer": "Apollo 13", 
-      "category": "5", 
-      "difficulty": 4, 
-      "id": 2, 
-      "question": "What movie earned Tom Hanks his third straight Oscar nomination, in 1996?"
-    }, 
-    {
-      "answer": "Tom Cruise", 
-      "category": "5", 
-      "difficulty": 4, 
-      "id": 4, 
-      "question": "What actor did author Anne Rice first denounce, then praise in the role of her beloved Lestat?"
-    }, 
-    {
-      "answer": "Maya Angelou", 
-      "category": "4", 
-      "difficulty": 2, 
-      "id": 5, 
-      "question": "Whose autobiography is entitled 'I Know Why the Caged Bird Sings'?"
-    }, 
-    {
-      "answer": "Edward Scissorhands", 
-      "category": "5", 
-      "difficulty": 3, 
-      "id": 6, 
-      "question": "What was the title of the 1990 fantasy directed by Tim Burton about a young man with multi-bladed appendages?"
-    }, 
-    {
-      "answer": "Muhammad Ali", 
-      "category": "4", 
-      "difficulty": 1, 
-      "id": 9, 
-      "question": "What boxer's original name is Cassius Clay?"
-    }, 
-    {
-      "answer": "Brazil", 
-      "category": "6", 
-      "difficulty": 3, 
-      "id": 10, 
-      "question": "Which is the only team to play in every soccer World Cup tournament?"
-    }, 
-    {
-      "answer": "Uruguay", 
-      "category": "6", 
-      "difficulty": 4, 
-      "id": 11, 
-      "question": "Which country won the first ever soccer World Cup in 1930?"
-    }, 
-    {
-      "answer": "George Washington Carver", 
-      "category": "4", 
-      "difficulty": 2, 
-      "id": 12, 
-      "question": "Who invented Peanut Butter?"
-    }, 
-    {
-      "answer": "Lake Victoria", 
-      "category": "3", 
-      "difficulty": 2, 
-      "id": 13, 
-      "question": "What is the largest lake in Africa?"
-    }, 
-    {
-      "answer": "The Palace of Versailles", 
-      "category": "3", 
-      "difficulty": 3, 
-      "id": 14, 
-      "question": "In which royal palace would you find the Hall of Mirrors?"
-    }
-  ], 
-  "success": true, 
-  "total_questions": 23
+      {
+          "answer": "Maya Angelou",
+          "category": "4",
+          "difficulty": 2,
+          "id": 5,
+          "question": "Whose autobiography is entitled 'I Know Why the Caged Bird Sings'?"
+      },
+      {
+          "answer": "Muhammad Ali",
+          "category": "4",
+          "difficulty": 1,
+          "id": 9,
+          "question": "What boxer's original name is Cassius Clay?"
+      },
+      {
+          "answer": "Apollo 13",
+          "category": "5",
+          "difficulty": 4,
+          "id": 2,
+          "question": "What movie earned Tom Hanks his third straight Oscar nomination, in 1996?"
+      },
+      {
+          "answer": "Tom Cruise",
+          "category": "5",
+          "difficulty": 4,
+          "id": 4,
+          "question": "What actor did author Anne Rice first denounce, then praise in the role of her beloved Lestat?"
+      },
+      {
+          "answer": "Edward Scissorhands",
+          "category": "5",
+          "difficulty": 3,
+          "id": 6,
+          "question": "What was the title of the 1990 fantasy directed by Tim Burton about a young man with multi-bladed appendages?"
+      },
+      {
+          "answer": "Brazil",
+          "category": "6",
+          "difficulty": 3,
+          "id": 10,
+          "question": "Which is the only team to play in every soccer World Cup tournament?"
+      },
+      {
+          "answer": "Uruguay",
+          "category": "6",
+          "difficulty": 4,
+          "id": 11,
+          "question": "Which country won the first ever soccer World Cup in 1930?"
+      },
+      {
+          "answer": "George Washington Carver",
+          "category": "4",
+          "difficulty": 2,
+          "id": 12,
+          "question": "Who invented Peanut Butter?"
+      },
+      {
+          "answer": "Lake Victoria",
+          "category": "3",
+          "difficulty": 2,
+          "id": 13,
+          "question": "What is the largest lake in Africa?"
+      },
+      {
+          "answer": "The Palace of Versailles",
+          "category": "3",
+          "difficulty": 3,
+          "id": 14,
+          "question": "In which royal palace would you find the Hall of Mirrors?"
+      }
+  ],
+  "success": true,
+  "total_questions": 20
 }
-
 ```
 
 ### POST '/questions'
@@ -172,8 +171,8 @@ Setting the `FLASK_APP` variable to `flaskr` directs flask to use the `flaskr` d
 
 ```json5
 {
-  "question": "What is my name?",
-  "answer": "Abdull Yahuza",
+  "question": "is Zibra an animal",
+  "answer": "Yes",
   "difficulty": 1,
   "category": 1
 }
@@ -183,10 +182,7 @@ Setting the `FLASK_APP` variable to `flaskr` directs flask to use the `flaskr` d
 
 ```json5
 {
-    "answer": "Abdull Yahuza",
-    "category": 1,
-    "difficulty": 1,
-    "question": "What is my name?",
+    "question": "is Zibra an animal",
     "success": true
 }
 ```
@@ -198,50 +194,36 @@ Setting the `FLASK_APP` variable to `flaskr` directs flask to use the `flaskr` d
 
 ```json5
 {
-    "current_category": "Geography",
-    "questions": [
-        {
-            "answer": "Lake Victoria",
-            "category": "3",
-            "difficulty": 2,
-            "id": 13,
-            "question": "What is the largest lake in Africa?"
-        },
-        {
-            "answer": "The Palace of Versailles",
-            "category": "3",
-            "difficulty": 3,
-            "id": 14,
-            "question": "In which royal palace would you find the Hall of Mirrors?"
-        },
-        {
-            "answer": "Agra",
-            "category": "3",
-            "difficulty": 2,
-            "id": 15,
-            "question": "The Taj Mahal is located in which Indian city?"
-        },
-        {
-            "answer": "Abdull Yahuza",
-            "category": "3",
-            "difficulty": 1,
-            "id": 21,
-            "question": "What is my name"
-        },
-        {
-            "answer": "Abuja",
-            "category": "3",
-            "difficulty": 1,
-            "id": 22,
-            "question": "What is the capital of Nigeria?"
-        }
-    ],
-    "success": true,
-    "total_questions": 5
+  "current_category": "Geography",
+  "questions": [
+      {
+          "answer": "Lake Victoria",
+          "category": "3",
+          "difficulty": 2,
+          "id": 13,
+          "question": "What is the largest lake in Africa?"
+      },
+      {
+          "answer": "The Palace of Versailles",
+          "category": "3",
+          "difficulty": 3,
+          "id": 14,
+          "question": "In which royal palace would you find the Hall of Mirrors?"
+      },
+      {
+          "answer": "Agra",
+          "category": "3",
+          "difficulty": 2,
+          "id": 15,
+          "question": "The Taj Mahal is located in which Indian city?"
+      }
+  ],
+  "success": true,
+  "total_questions": 3
 }
 ```
 
-### POST '/questions/results'
+### POST '/questions/search'
 
 - Search questions
 - Request Arguments: searchTerm
@@ -285,16 +267,16 @@ Setting the `FLASK_APP` variable to `flaskr` directs flask to use the `flaskr` d
 
 - Returns:
 
-```
+```json5
 {
-    "question": {
-        "answer": "Abdull Yahuza",
-        "category": "3",
-        "difficulty": 1,
-        "id": 24,
-        "question": "What is my name"
-    },
-    "success": true
+  "question": {
+      "answer": "The Palace of Versailles",
+      "category": "3",
+      "difficulty": 3,
+      "id": 14,
+      "question": "In which royal palace would you find the Hall of Mirrors?"
+  },
+  "success": true
 }
 ```
 
